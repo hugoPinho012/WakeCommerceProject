@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34902.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeCommerceProject.API", "WakeCommerceProject\WakeCommerceProject.API.csproj", "{9AB5C869-BA6F-429B-AB16-CFED4B6E0796}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeCommerceProject.Domain", "WakeCommerceProject.Domain\WakeCommerceProject.Domain.csproj", "{B8FB2ACB-B1C9-412E-898A-2E4108AFB480}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeCommerceProject.Application", "WakeCommerceProject.Application\WakeCommerceProject.Application.csproj", "{EA5AD6C1-92B7-44DD-AE36-1FC02A28EFDB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeCommerceProject.Infra.Data", "WakeCommerceProject.Infra.Data\WakeCommerceProject.Infra.Data.csproj", "{DEF38BE5-C2E1-4C27-8591-69C4553B48C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeCommerceProject.API.Tests", "WakeCommerceProject.API.Tests\WakeCommerceProject.API.Tests.csproj", "{C411B2B5-CF7A-4316-8A8F-D4764F313C81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeCommerceProject.Domain.Tests", "WakeCommerceProject.Domain.Tests\WakeCommerceProject.Domain.Tests.csproj", "{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AB5C869-BA6F-429B-AB16-CFED4B6E0796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB5C869-BA6F-429B-AB16-CFED4B6E0796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB5C869-BA6F-429B-AB16-CFED4B6E0796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB5C869-BA6F-429B-AB16-CFED4B6E0796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8FB2ACB-B1C9-412E-898A-2E4108AFB480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8FB2ACB-B1C9-412E-898A-2E4108AFB480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8FB2ACB-B1C9-412E-898A-2E4108AFB480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8FB2ACB-B1C9-412E-898A-2E4108AFB480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA5AD6C1-92B7-44DD-AE36-1FC02A28EFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA5AD6C1-92B7-44DD-AE36-1FC02A28EFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA5AD6C1-92B7-44DD-AE36-1FC02A28EFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA5AD6C1-92B7-44DD-AE36-1FC02A28EFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF38BE5-C2E1-4C27-8591-69C4553B48C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF38BE5-C2E1-4C27-8591-69C4553B48C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF38BE5-C2E1-4C27-8591-69C4553B48C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF38BE5-C2E1-4C27-8591-69C4553B48C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C411B2B5-CF7A-4316-8A8F-D4764F313C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C411B2B5-CF7A-4316-8A8F-D4764F313C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C411B2B5-CF7A-4316-8A8F-D4764F313C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C411B2B5-CF7A-4316-8A8F-D4764F313C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4734CA0F-F860-4945-A577-626FF79AB7CE}
+	EndGlobalSection
+EndGlobal
