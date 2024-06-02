@@ -15,6 +15,8 @@ namespace WakeCommerceProject.Application.Mappings
                 Description = productModel.Description,
                 Price = productModel.Price,
                 Stock = productModel.Stock,
+                SKU = productModel.SKU,
+
             };
         }
 
@@ -24,7 +26,9 @@ namespace WakeCommerceProject.Application.Mappings
                 Name = productDTO.Name,
                 Description = productDTO.Description ?? "",
                 Price = productDTO.Price,
-                Stock = productDTO.Stock};
+                Stock = productDTO.Stock,
+                SKU = productDTO.SKU ?? "",
+                };
         }
     }
 }

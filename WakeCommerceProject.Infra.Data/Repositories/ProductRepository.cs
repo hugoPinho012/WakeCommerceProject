@@ -50,6 +50,11 @@ namespace WakeCommerceProject.Infra.Data.Repositories
                 products = products.Where(p => p.Name.Contains(query.Name));
             }
 
+            if(!string.IsNullOrEmpty(query.SKU))
+            {
+                products = products.Where(p => p.SKU.Contains(query.SKU));
+            }
+
             if(!string.IsNullOrEmpty(query.SortBy))
             {
                 if(query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
@@ -57,7 +62,12 @@ namespace WakeCommerceProject.Infra.Data.Repositories
                     products = query.IsDescending ? products.OrderByDescending(p => p.Name) : products.OrderBy(p => p.Name);
                 }
 
-                  if(query.SortBy.Equals("Price"))
+                if(query.SortBy.Equals("SKU", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = query.IsDescending ? products.OrderByDescending(p => p.SKU) : products.OrderBy(p => p.SKU);
+                }
+
+                if(query.SortBy.Equals("Price"))
                 {
                     products = query.IsDescending ? products.OrderByDescending(p => p.Price) : products.OrderBy(p => p.Price);
                 }
@@ -66,6 +76,8 @@ namespace WakeCommerceProject.Infra.Data.Repositories
                 {
                     products = query.IsDescending ? products.OrderByDescending(p => p.Stock) : products.OrderBy(p => p.Stock);
                 }
+
+                
             }
 
             return await products.ToListAsync();
