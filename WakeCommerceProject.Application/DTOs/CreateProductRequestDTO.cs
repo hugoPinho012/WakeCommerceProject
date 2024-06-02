@@ -12,6 +12,9 @@ namespace WakeCommerceProject.Application.DTOs
         [MaxLength(500, ErrorMessage = "Description cannot be over 500 characters")]
         public string? Description { get; set; } = string.Empty;
 
+        [MaxLength(100, ErrorMessage = "SKU cannot be over 100 characters")]
+        public string? SKU { get; set; } = string.Empty;
+
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Price cannot be negative")]
         public decimal Price { get; set; }

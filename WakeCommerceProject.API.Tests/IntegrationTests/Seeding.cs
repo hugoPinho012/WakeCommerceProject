@@ -20,11 +20,11 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
         {
             return new List<Product>()
             {
-                new Product(1, "Camiseta", "Camiseta manga curta estampada", 89.99m, 10),
-                new Product(2, "Casaco", "Casaco moletom liso", 299.99m, 8),
-                new Product(3, "Calça", "Calça jeans", 399.99m, 5),
-                new Product(4, "Boné", "Boné vermelho e cinza", 59.99m, 12),
-                new Product(5, "Tênis", "Tênis de corrida", 559.99m, 3)
+                new Product{ Id = 1, Name = "Camiseta", Description = "Camiseta manga curta estampada", Price = 89.99m, Stock = 10, SKU="AC12345" },
+                new Product{ Id = 2, Name = "Casaco", Description = "Casaco moletom liso", Price = 299.99m, Stock = 8 , SKU="AC12346"},
+                new Product{ Id = 3, Name = "Calça", Description = "Calça jeans", Price = 399.99m, Stock = 5 , SKU="AC12347"},
+                new Product{ Id = 4, Name = "Boné", Description = "Boné vermelho e cinza", Price = 59.99m, Stock = 12, SKU="AC12348" },
+                new Product{ Id = 5, Name = "Tênis", Description = "Tênis de corrida", Price = 559.99m, Stock = 3 , SKU="AC12349"}
             };
         }
     }

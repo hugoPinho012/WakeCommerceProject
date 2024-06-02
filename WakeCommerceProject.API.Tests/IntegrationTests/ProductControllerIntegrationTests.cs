@@ -46,7 +46,8 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
                 
             }
 
-            var newProduct = new Product(12, "Name", "Description", 49.99m, 5);
+            var newProduct = new Product {Id=12, Name="Name", Description="Description", Price=49.99m, Stock=5, SKU = "AL1234" };
+
             var serializedProduct = JsonConvert.SerializeObject(newProduct);
 
             HttpContent content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
@@ -56,6 +57,34 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
             var response = await _httpClient.PostAsync("/api/Product", content);
 
             response.StatusCode.Should().Be(HttpStatusCode.Created);
+        }
+
+        [Fact(DisplayName = "Post Invalid Params Return BadRequest")]
+        public async Task Post_SendingInvalidProduct_ReturnBadRequest()
+        {
+            // Setting up sql database
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<ApplicationDbContext>();
+
+                db.Database.EnsureCreated();
+                // TODO: Resolver isso
+                try { db.Database.Migrate(); } catch { }
+
+            }
+
+            var newProduct = new Product { Id = 12, Name = "Name", Description = "Description", Price = -49.99m, Stock = 5, SKU="AH1234"};
+
+            var serializedProduct = JsonConvert.SerializeObject(newProduct);
+
+            HttpContent content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await _httpClient.PostAsync("/api/Product", content);
+
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
 
         [Fact(DisplayName = "Get Return OK and Products")]

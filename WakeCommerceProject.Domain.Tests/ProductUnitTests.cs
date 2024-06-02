@@ -4,6 +4,7 @@ namespace WakeCommerceProject.Domain.Tests
 {
     public class ProductUnitTest
     {
+        /*
         [Fact(DisplayName ="Create Product With Valid Params")]
         public void CreateProduct_WithValidParameters_ResultObjectValidState()
         {
@@ -19,6 +20,6 @@ namespace WakeCommerceProject.Domain.Tests
             action.Should()
                 .Throw<WakeCommerceProject.Domain.DomainExceptionValidation>()
                 .WithMessage("Invalid price. Price cannot be negative.");
-        }
+        } */
     }
 }

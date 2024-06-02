@@ -20,11 +20,11 @@ namespace WakeCommerceProject.Application.Mappings
 
         public static Product ToProductFromCreateDTO(this CreateProductRequestDTO productDTO)
         {
-            return new Product(
-                productDTO.Name, 
-                productDTO.Description ?? "", 
-                productDTO.Price, 
-                productDTO.Stock);
+            return new Product {
+                Name = productDTO.Name,
+                Description = productDTO.Description ?? "",
+                Price = productDTO.Price,
+                Stock = productDTO.Stock};
         }
     }
 }

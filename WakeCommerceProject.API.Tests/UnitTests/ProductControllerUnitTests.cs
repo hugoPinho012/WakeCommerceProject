@@ -34,8 +34,8 @@ namespace WakeCommerceProject.API.Tests.UnitTests
             // Criamos uma lista de produtos para os testes
             var products = new List<Product>
             {
-                new Product(12, "Moletom", "Moletom vermelho", 199.99m, 1),
-                new Product(13, "Chinelo", "Chinelo verde", 49.99m, 6)
+                new Product{ Id = 12, Name = "Moletom", Description = "Moletom vermelho", Price = 199.99m, Stock = 1, SKU= "AG12345"},
+                new Product{ Id = 13, Name = "Chinelo", Description = "Chinelo verde", Price = 49.99m, Stock = 6, SKU= "AG12346"}
             };
 
             // O método GetAllAsync quando chamado com queryObject retorna a lista de produtos criada anteriormente
@@ -66,7 +66,7 @@ namespace WakeCommerceProject.API.Tests.UnitTests
         {
             // Arrange
             var id = 1;
-            var product = new Product(12, "Moletom", "Moletom vermelho", 199.99m, 1); // Create a sample product
+            var product = new Product { Id = id, Name = "Moletom", Description = "Moletom vermelho", Price = 199.99m, Stock=1, SKU="AE12456" }; // Create a sample product
             _mockProductRepository.Setup(repo => repo.GetByIdAsync(id)).ReturnsAsync(product);
 
             var controller = new ProductController(_mockProductRepository.Object);
@@ -88,13 +88,10 @@ namespace WakeCommerceProject.API.Tests.UnitTests
                 Name = "Corta-vento",
                 Description = "Corta-vento preto",
                 Price = 299.9m,
-                Stock = 4
+                Stock = 4,
+                SKU = "AD1246"
             };
 
-            var productModel = productDTO.ToProductFromCreateDTO(); // Convert to product model
-            productModel.Id = 1; // Set a sample product ID
-
-            _mockProductRepository.Setup(repo => repo.CreateAsync(productModel)).ReturnsAsync(productModel);
 
             var controller = new ProductController(_mockProductRepository.Object);
 
@@ -108,24 +105,7 @@ namespace WakeCommerceProject.API.Tests.UnitTests
 
         }
 
-        [Fact(DisplayName = "CreateAsync With Invalid Parameters Returns Bad Request")]
-        public async Task ProductController_CreateAsync_InvalidParameters_ReturnsBadRequest()
-        {
-            // Arrange
-            var productDTO = new CreateProductRequestDTO
-            {
-                Name = "Corta-vento",
-                Description = "Corta-vento preto",
-                Price = -299.9m,
-                Stock = 4
-            };
-
-            Action action = () => productDTO.ToProductFromCreateDTO();
-            action.Should()
-                .Throw<DomainExceptionValidation>()
-                .WithMessage("Invalid price. Price cannot be negative.");
-
-        }
+      
 
         [Fact(DisplayName = "UpdateAsync Returns OK")]
         public async Task ProductController_UpdateAsync_ValidId_ReturnsOkResult()
@@ -136,7 +116,14 @@ namespace WakeCommerceProject.API.Tests.UnitTests
 
             // Mock the repository method
             _mockProductRepository.Setup(repo => repo.UpdateAsync(productId, updateDTO))
-                .ReturnsAsync(new Product(1, "Chapéu", "Chapéu marrom", 45.99m, 5));
+                .ReturnsAsync(new Product {
+                    Id = productId, 
+                    Name = "Chapéu", 
+                    Description = "Chapéu marrom", 
+                    Price = 45.99m, 
+                    Stock = 5,
+                    SKU = "AD1245"
+                });
 
             var controller = new ProductController(_mockProductRepository.Object);
 
@@ -155,7 +142,7 @@ namespace WakeCommerceProject.API.Tests.UnitTests
             // Arrange
             var productId = 1; // ID do produto a ser excluído
             _mockProductRepository.Setup(repo => repo.DeleteAsync(productId))
-                .ReturnsAsync(new Product(1, "Chapéu", "Chápeu marrom", 45.99m, 5)); // Simula que o produto foi encontrado
+                .ReturnsAsync(new Product()); // Simula que o produto foi encontrado
 
             var controller = new ProductController(_mockProductRepository.Object);
 

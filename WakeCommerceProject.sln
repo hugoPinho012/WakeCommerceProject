@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeCommerceProject.Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeCommerceProject.Infra.Data", "WakeCommerceProject.Infra.Data\WakeCommerceProject.Infra.Data.csproj", "{DEF38BE5-C2E1-4C27-8591-69C4553B48C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeCommerceProject.API.Tests", "WakeCommerceProject.API.Tests\WakeCommerceProject.API.Tests.csproj", "{C411B2B5-CF7A-4316-8A8F-D4764F313C81}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeCommerceProject.Domain.Tests", "WakeCommerceProject.Domain.Tests\WakeCommerceProject.Domain.Tests.csproj", "{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeCommerceProject.API.Tests", "WakeCommerceProject.API.Tests\WakeCommerceProject.API.Tests.csproj", "{C411B2B5-CF7A-4316-8A8F-D4764F313C81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{C411B2B5-CF7A-4316-8A8F-D4764F313C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C411B2B5-CF7A-4316-8A8F-D4764F313C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C411B2B5-CF7A-4316-8A8F-D4764F313C81}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E6C6E7A-2CA8-4A44-B413-07DB1E4A127D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

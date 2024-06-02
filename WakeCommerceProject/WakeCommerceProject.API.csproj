@@ -20,4 +20,8 @@
     <ProjectReference Include="..\WakeCommerceProject.Infra.Data\WakeCommerceProject.Infra.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include=".github\workflows\YAMLFile.yml" />
+  </ItemGroup>
+
 </Project>
