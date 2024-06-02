@@ -17,12 +17,15 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
 
             builder.ConfigureTestServices(services =>
             {
+                // Remove the existing DbContextOptions<ApplicationDbContext>
                 var dbContextDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
                 services.Remove(dbContextDescriptor);
 
+                 // Remove the existing DbConnection
                 var dbConnectionDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbConnection));
                 services.Remove(dbConnectionDescriptor);
 
+                // Add an in-memory SQLite database connection
                 services.AddSingleton<DbConnection>(container =>
                 {
                     var connection = new SqliteConnection("DataSource=:memory:");
@@ -31,6 +34,7 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
                     return connection;
                 });
 
+                // Configure the ApplicationDbContext to use the in-memory SQLite connection
                 services.AddDbContext<ApplicationDbContext>((container, options) =>
                 {
                     var connection = container.GetRequiredService<DbConnection>();

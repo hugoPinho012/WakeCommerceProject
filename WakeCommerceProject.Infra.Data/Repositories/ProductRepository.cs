@@ -39,6 +39,7 @@ namespace WakeCommerceProject.Infra.Data.Repositories
 
         public async Task<List<Product>> GetAllAsync(QueryObject query)
         {
+            // Creates an IQueryable for querying the 'Products' entity
             var products = _context.Products.AsQueryable();
 
             if (!string.IsNullOrEmpty(query.Name))
@@ -72,8 +73,6 @@ namespace WakeCommerceProject.Infra.Data.Repositories
                 {
                     products = query.IsDescending ? products.OrderByDescending(p => p.Stock) : products.OrderBy(p => p.Stock);
                 }
-
-
             }
 
             return await products.ToListAsync();

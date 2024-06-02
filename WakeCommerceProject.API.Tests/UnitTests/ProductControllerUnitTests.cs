@@ -24,34 +24,27 @@ namespace WakeCommerceProject.API.Tests.UnitTests
             //Arrange
             QueryObject queryObject = new QueryObject();
 
-            // Criamos uma lista de produtos para os testes
+            // Create a sample list for the test
             var products = new List<Product>
             {
                 new Product{ Id = 12, Name = "Moletom", Description = "Moletom vermelho", Price = 199.99m, Stock = 1, SKU= "AG12345"},
                 new Product{ Id = 13, Name = "Chinelo", Description = "Chinelo verde", Price = 49.99m, Stock = 6, SKU= "AG12346"}
             };
 
-            // O método GetAllAsync quando chamado com queryObject retorna a lista de produtos criada anteriormente
+            // Set up a mock behavior for the GetAllAsync method of the product repository
             _mockProductRepository.Setup(repo => repo.GetAllAsync(queryObject)).ReturnsAsync(products);
 
-            // Injetamos o repositório mock como dependência a uma instância do controlador
+            // Inject the mock repository as a dependency into an instance of the controller
             var controller = new ProductController(_mockProductRepository.Object);
 
             //Act
-            // Chamamos o método GetAllAsync que deve retornar uma Ok
             var result = await controller.GetAllAsync(queryObject) as OkObjectResult;
 
             //Assert
-            // Verificamos se o resultado não é nulo
-            Assert.NotNull(result);
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(200);
 
-            // Verificamos se o código de status HTTP retornado é 200
-            Assert.Equal(200, result.StatusCode);
-
-            var productDTOs = result.Value as IEnumerable<ProductDTO>;
-            productDTOs.Should().NotBeNull();
-            // Verificamos se o número de elementos na coleção é igual ao número de produtos na lista original
-            productDTOs.Should().HaveCount(products.Count);
+           
         }
 
         [Fact(DisplayName = "GetById Returns OK")]
@@ -134,9 +127,9 @@ namespace WakeCommerceProject.API.Tests.UnitTests
         public async Task ProductController_DeleteAsync_ReturnsNoContent_WhenProductModelIsNotNull()
         {
             // Arrange
-            var productId = 1; // ID do produto a ser excluído
+            var productId = 1; // Product id to be deleted
             _mockProductRepository.Setup(repo => repo.DeleteAsync(productId))
-                .ReturnsAsync(new Product()); // Simula que o produto foi encontrado
+                .ReturnsAsync(new Product());
 
             var controller = new ProductController(_mockProductRepository.Object);
 

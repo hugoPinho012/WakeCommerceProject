@@ -13,11 +13,15 @@ namespace WakeCommerceProject.API
                 using var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 try
                 {
+                    // Ensure tat the database is created 
                     context.Database.EnsureCreated();
+
+                    // Check if any products exits 
                     var products = context.Products.FirstOrDefault();
 
                     if (products == null)
                     {
+                        // Add samples to the datavase
                         context.Products.AddRange(
                             new Product { Id = 1, Name = "Camiseta", Description = "Camiseta manga curta estampada", Price = 89.99m, Stock = 10, SKU = "B12345" },
                             new Product { Id = 2, Name = "Casaco", Description = "Casaco moletom liso", Price = 299.99m, Stock = 8, SKU = "AB12346" },
@@ -31,6 +35,7 @@ namespace WakeCommerceProject.API
                 }
                 catch (Exception)
                 {
+                    // Handle any exceptions that occur during database operations
                     throw;
                 }
                 return app;

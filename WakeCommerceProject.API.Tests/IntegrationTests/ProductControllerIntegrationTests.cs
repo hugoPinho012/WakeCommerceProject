@@ -35,6 +35,7 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
 
                 try
                 {
+                    // Apply any pending migrations to the database
                     db.Database.Migrate();
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex) when (ex.Message.Contains("table \"Products\" already exists"))
@@ -42,11 +43,11 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
                     Console.WriteLine("The 'Products' table already exists.");
                 }
 
+                // Seed the database with initial data if no products exist
                 if (!db.Products.Any())
                 {
                     Seeding.InitializeTestDb(db);
                 }
-
 
             }
         }
@@ -72,7 +73,8 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
         {
 
             var newProduct = new Product { Id = 12, Name = "Name", Description = "Description", Price = -49.99m, Stock = 5, SKU = "AH1234" };
-
+            
+            // Serialize the product object to JSON
             var serializedProduct = JsonConvert.SerializeObject(newProduct);
 
             HttpContent content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
@@ -89,6 +91,8 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
         {
 
             var response = await _httpClient.GetAsync("api/Product");
+
+            // Reads the response content and deserializes it into a list of 'Product' objects
             var result = await response.Content.ReadFromJsonAsync<List<Product>>();
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
