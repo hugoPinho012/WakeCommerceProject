@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text;
 using WakeCommerceProject.Domain;
 using WakeCommerceProject.Infra.Data.Context;
 
@@ -29,24 +25,36 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
             {
                 AllowAutoRedirect = false
             });
-        }
-        
-        [Fact(DisplayName = "Post Valid Params Return OK")]
-        public async Task Post_SendingValidProduct_ReturnOK()
-        {
-            // Setting up sql database
+
             using (var scope = _factory.Services.CreateScope())
             {
                 var scopedServices = scope.ServiceProvider;
                 var db = scopedServices.GetRequiredService<ApplicationDbContext>();
 
                 db.Database.EnsureCreated();
-                // TODO: Resolver isso
-                try { db.Database.Migrate(); } catch { }
-                
-            }
 
-            var newProduct = new Product {Id=12, Name="Name", Description="Description", Price=49.99m, Stock=5, SKU = "AL1234" };
+                try
+                {
+                    db.Database.Migrate();
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException ex) when (ex.Message.Contains("table \"Products\" already exists"))
+                {
+                    Console.WriteLine("The 'Products' table already exists.");
+                }
+
+                if (!db.Products.Any())
+                {
+                    Seeding.InitializeTestDb(db);
+                }
+
+
+            }
+        }
+
+        [Fact(DisplayName = "Post Valid Params Return OK")]
+        public async Task Post_SendingValidProduct_ReturnOK()
+        {
+            var newProduct = new Product { Id = 12, Name = "Name", Description = "Description", Price = 49.99m, Stock = 5, SKU = "AL1234" };
 
             var serializedProduct = JsonConvert.SerializeObject(newProduct);
 
@@ -62,19 +70,8 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
         [Fact(DisplayName = "Post Invalid Params Return BadRequest")]
         public async Task Post_SendingInvalidProduct_ReturnBadRequest()
         {
-            // Setting up sql database
-            using (var scope = _factory.Services.CreateScope())
-            {
-                var scopedServices = scope.ServiceProvider;
-                var db = scopedServices.GetRequiredService<ApplicationDbContext>();
 
-                db.Database.EnsureCreated();
-                // TODO: Resolver isso
-                try { db.Database.Migrate(); } catch { }
-
-            }
-
-            var newProduct = new Product { Id = 12, Name = "Name", Description = "Description", Price = -49.99m, Stock = 5, SKU="AH1234"};
+            var newProduct = new Product { Id = 12, Name = "Name", Description = "Description", Price = -49.99m, Stock = 5, SKU = "AH1234" };
 
             var serializedProduct = JsonConvert.SerializeObject(newProduct);
 
@@ -90,23 +87,6 @@ namespace WakeCommerceProject.API.Tests.IntegrationTests
         [Fact(DisplayName = "Get Return OK and Products")]
         public async Task GetProduct_ProductExists_ReturnOKWithProduct()
         {
-            // Setting up sql database
-            using (var scope = _factory.Services.CreateScope())
-            {
-                var scopedServices = scope.ServiceProvider;
-                var db = scopedServices.GetRequiredService<ApplicationDbContext>();
-
-                db.Database.EnsureCreated();
-                // TODO: Resolver isso
-                try
-                {
-                    db.Database.Migrate();
-                    Seeding.InitializeTestDb(db);
-                }
-                catch { }
-
-
-            }
 
             var response = await _httpClient.GetAsync("api/Product");
             var result = await response.Content.ReadFromJsonAsync<List<Product>>();

@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WakeCommerceProject.Application.DTOs;
 using WakeCommerceProject.Application.Helpers;
 using WakeCommerceProject.Application.Interfaces;
 using WakeCommerceProject.Application.Mappings;
-using WakeCommerceProject.Infra.Data.Context;
 
 namespace WakeCommerceProject.API.Controllers
 {
@@ -21,7 +19,7 @@ namespace WakeCommerceProject.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery] QueryObject query)
         {
-        
+
             var products = await _productRepository.GetAllAsync(query);
             var productDTO = products.Select(s => s.ToProductDTO());
 
@@ -41,7 +39,7 @@ namespace WakeCommerceProject.API.Controllers
             return Ok(stock.ToProductDTO());
         }
 
-      
+
 
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] CreateProductRequestDTO productDTO)

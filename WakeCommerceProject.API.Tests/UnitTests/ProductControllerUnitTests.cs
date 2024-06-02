@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WakeCommerceProject.Application.DTOs;
-using WakeCommerceProject.Application.Interfaces;
-using WakeCommerceProject.API.Controllers;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using WakeCommerceProject.Application.Helpers;
 using Moq;
+using WakeCommerceProject.API.Controllers;
+using WakeCommerceProject.Application.DTOs;
+using WakeCommerceProject.Application.Helpers;
+using WakeCommerceProject.Application.Interfaces;
 using WakeCommerceProject.Domain;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using WakeCommerceProject.Application.Mappings;
 
 namespace WakeCommerceProject.API.Tests.UnitTests
 {
@@ -66,7 +59,7 @@ namespace WakeCommerceProject.API.Tests.UnitTests
         {
             // Arrange
             var id = 1;
-            var product = new Product { Id = id, Name = "Moletom", Description = "Moletom vermelho", Price = 199.99m, Stock=1, SKU="AE12456" }; // Create a sample product
+            var product = new Product { Id = id, Name = "Moletom", Description = "Moletom vermelho", Price = 199.99m, Stock = 1, SKU = "AE12456" }; // Create a sample product
             _mockProductRepository.Setup(repo => repo.GetByIdAsync(id)).ReturnsAsync(product);
 
             var controller = new ProductController(_mockProductRepository.Object);
@@ -105,7 +98,7 @@ namespace WakeCommerceProject.API.Tests.UnitTests
 
         }
 
-      
+
 
         [Fact(DisplayName = "UpdateAsync Returns OK")]
         public async Task ProductController_UpdateAsync_ValidId_ReturnsOkResult()
@@ -116,11 +109,12 @@ namespace WakeCommerceProject.API.Tests.UnitTests
 
             // Mock the repository method
             _mockProductRepository.Setup(repo => repo.UpdateAsync(productId, updateDTO))
-                .ReturnsAsync(new Product {
-                    Id = productId, 
-                    Name = "Chapéu", 
-                    Description = "Chapéu marrom", 
-                    Price = 45.99m, 
+                .ReturnsAsync(new Product
+                {
+                    Id = productId,
+                    Name = "Chapéu",
+                    Description = "Chapéu marrom",
+                    Price = 45.99m,
                     Stock = 5,
                     SKU = "AD1245"
                 });

@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WakeCommerceProject.Application.DTOs;
 using WakeCommerceProject.Application.Helpers;
 using WakeCommerceProject.Application.Interfaces;
@@ -46,38 +41,39 @@ namespace WakeCommerceProject.Infra.Data.Repositories
         {
             var products = _context.Products.AsQueryable();
 
-            if(!string.IsNullOrEmpty(query.Name)){
+            if (!string.IsNullOrEmpty(query.Name))
+            {
                 products = products.Where(p => p.Name.Contains(query.Name));
             }
 
-            if(!string.IsNullOrEmpty(query.SKU))
+            if (!string.IsNullOrEmpty(query.SKU))
             {
                 products = products.Where(p => p.SKU.Contains(query.SKU));
             }
 
-            if(!string.IsNullOrEmpty(query.SortBy))
+            if (!string.IsNullOrEmpty(query.SortBy))
             {
-                if(query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                if (query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
                 {
                     products = query.IsDescending ? products.OrderByDescending(p => p.Name) : products.OrderBy(p => p.Name);
                 }
 
-                if(query.SortBy.Equals("SKU", StringComparison.OrdinalIgnoreCase))
+                if (query.SortBy.Equals("SKU", StringComparison.OrdinalIgnoreCase))
                 {
                     products = query.IsDescending ? products.OrderByDescending(p => p.SKU) : products.OrderBy(p => p.SKU);
                 }
 
-                if(query.SortBy.Equals("Price"))
+                if (query.SortBy.Equals("Price"))
                 {
                     products = query.IsDescending ? products.OrderByDescending(p => p.Price) : products.OrderBy(p => p.Price);
                 }
 
-                  if(query.SortBy.Equals("Stock"))
+                if (query.SortBy.Equals("Stock"))
                 {
                     products = query.IsDescending ? products.OrderByDescending(p => p.Stock) : products.OrderBy(p => p.Stock);
                 }
 
-                
+
             }
 
             return await products.ToListAsync();

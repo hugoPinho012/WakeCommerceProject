@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WakeCommerceProject.Domain;
+﻿using WakeCommerceProject.Domain;
 using WakeCommerceProject.Infra.Data.Context;
 
 namespace WakeCommerceProject.API.Tests.IntegrationTests

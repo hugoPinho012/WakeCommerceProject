@@ -22,7 +22,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddMvc(options =>
 {
-   options.SuppressAsyncSuffixInActionNames = false;
+    options.SuppressAsyncSuffixInActionNames = false;
 });
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
