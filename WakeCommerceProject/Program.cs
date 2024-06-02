@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using WakeCommerceProject.API;
 using WakeCommerceProject.Application.Interfaces;
 using WakeCommerceProject.Infra.Data.Context;
 using WakeCommerceProject.Infra.Data.Repositories;
@@ -40,6 +41,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.Seed();
 
 app.Run();
 
